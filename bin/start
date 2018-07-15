@@ -1,0 +1,11 @@
+const Server = require(`${__dirname}/../index.js`).Server;
+const opts = require('opts');
+opts.parse([
+    {long: 'host', description: 'host to listen', value: true, required: true},
+    {long: 'port', description: 'port to listen', value: true, required: true},
+    {long: 'config', description: 'wechat config', value: true, required: true},
+    {long: 'log-path', description: 'log path', value: true, required: false}
+], [], true)
+
+let server = new Server();
+server.start(opts.get('host'), opts.get('port'), opts.get('config'), opts.get('log-path'));

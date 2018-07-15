@@ -1,0 +1,27 @@
+{
+  "name": "easy-wechat-cs",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "skip",
+  "license": "ISC",
+  "dependencies": {
+    "@qtk/schema-tcp-request-framework": "^2.0.13",
+    "easy-wechat": "^2.0.0",
+    "log4js": "^2.9.0",
+    "opts": "^1.2.6",
+    "path": "^0.12.7",
+    "semantic-schema": "^0.3.1",
+    "skip-request": "0.0.6"
+  },
+  "devDependencies": {
+    "express": "^4.16.3",
+    "mkdirp": "^0.5.1",
+    "ejs": "^2.6.1",
+    "klaw-sync": "^4.0.0",
+    "child_process": "^1.0.2"
+  }
+}
