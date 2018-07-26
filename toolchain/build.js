@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const PROJECT_ROOT = `${__dirname}/../`;
 
-let schemas = walk(`${PROJECT_ROOT}/src/server/schema`, {nodir: true});
+let schemas = walk(`${__dirname}/../node_modules/easy-wechat/src/schema`, {nodir: true});
 let newSchemas = schemas.filter(({path: filePath}) => !fs.existsSync(`${__dirname}/../src/server/handler/${path.basename(filePath, '.js')}/index.js`));
 
 

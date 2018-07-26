@@ -104,6 +104,12 @@ describe("test", function() {
         assert(typeof response === 'object', response);
     });
 
+    it('wx_app.msg.common.text_security_check', async function() {
+        this.timeout(10000); 
+        const response = await client.wxApp.msg.common.textSecurityCheck("11111");
+        assert(typeof response === 'boolean', response);
+    });
+    
     it('wx_app.session.get', async function() {
         this.timeout(10000); 
         const response = await client.wxApp.session.get('023PMWUA0JqFyg264jWA0JhKUA0PMWUd');
