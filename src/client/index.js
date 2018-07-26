@@ -19,12 +19,6 @@ module.exports = class {
 	}
 
     
-    get config() { 
-        return {
-		    get: () => this._request('config.get', null)
-		}
-    }
-    
     get payment() { 
         return {
 		    common: {
@@ -76,6 +70,9 @@ module.exports = class {
     get wxApp() { 
         return {
 		    msg: {
+		        common: {
+		            textSecurityCheck: (request) => this._request('wx_app.msg.common.text_security_check', request)
+		        },
 		        cs: {
 		            imageSend: (request) => this._request('wx_app.msg.cs.image_send', request),
 		            linkSend: (request) => this._request('wx_app.msg.cs.link_send', request),
