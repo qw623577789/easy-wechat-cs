@@ -2,6 +2,6 @@ npm-debug.log
 node_modules
 .vscode
 package-lock.json
-/demo/start_server.sh
-/demo/middleware-client.js
+/demo/start_server-dev.sh
+/demo/middleware-client-dev.js
 /demo/api-client-dev.js
