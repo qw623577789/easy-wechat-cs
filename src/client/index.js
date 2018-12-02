@@ -26,7 +26,8 @@ module.exports = class {
 		    },
 		    order: {
 		        create: (request) => this._request('payment.order.create', request),
-		        get: (request) => this._request('payment.order.get', request)
+		        get: (request) => this._request('payment.order.get', request),
+		        refund: (request) => this._request('payment.order.refund', request)
 		    },
 		    redPacket: {
 		        fissionSend: (request) => this._request('payment.red_packet.fission_send', request),
