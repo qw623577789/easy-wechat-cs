@@ -108,6 +108,7 @@ module.exports = class {
 		return {
 			platformMessage: this._easyWechat.middleware.platformMessage,
 			payment: this._easyWechat.middleware.payment,
+            refund: this._easyWechat.middleware.refund,
 			wxAppJsonMessage: this._easyWechat.middleware.wxAppJsonMessage,
 			wxAppXmlMessage: this._easyWechat.middleware.wxAppXmlMessage,
 		}

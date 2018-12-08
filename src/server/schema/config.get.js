@@ -27,7 +27,8 @@ const response = object().desc("配置key").properties({
         mchId: string(),
         key: string(),
         notifyUrl: string(),
-        pfxFile: string().desc('微信商户平台证书')
+        pfxFile: string().desc('微信商户平台证书'),
+        refundNotifyUrl: string()
     }).required('appId', 'mchId', 'key', 'notifyUrl'),
     logDir: string()
 });
