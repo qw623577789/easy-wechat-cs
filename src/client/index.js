@@ -47,9 +47,6 @@ module.exports = class {
 		        get: () => this._request('platform.menu.get', null),
 		        set: (request) => this._request('platform.menu.set', request)
 		    },
-		    msg: {
-		        push: (request) => this._request('platform.msg.push', request)
-		    },
 		    oauth: {
 		        accessToken: {
 		            check: (request) => this._request('platform.oauth.access_token.check', request),
@@ -60,6 +57,9 @@ module.exports = class {
 		            getForBase: (request) => this._request('platform.oauth.code.get_for_base', request),
 		            getForUserInfo: (request) => this._request('platform.oauth.code.get_for_user_info', request)
 		        }
+		    },
+		    templateMessage: {
+		        push: (request) => this._request('platform.template_message.push', request)
 		    },
 		    user: {
 		        infoGetByNormalAccessToken: (request) => this._request('platform.user.info_get_by_normal_access_token', request),
