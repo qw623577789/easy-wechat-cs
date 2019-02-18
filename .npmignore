@@ -5,3 +5,4 @@ package-lock.json
 /demo/start_server-dev.sh
 /demo/middleware-client-dev.js
 /demo/api-client-dev.js
+/log
