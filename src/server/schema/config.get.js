@@ -1,4 +1,4 @@
-const {array, object, string, integer, empty} = require('semantic-schema').schema;
+const {array, object, string, integer, empty} = require('@qtk/schema').schema;
 
 const info = {
     title: "获取server端配置",
@@ -13,7 +13,7 @@ const response = object().desc("配置key").properties({
         secret: string(),
         token: string(),
         aesKey: string()
-    }).required("appId", "secret"),
+    }).require("appId", "secret"),
     wxApp: object().desc("微信小程序配置").properties({
         appId: string(),
         secret: string(),
@@ -21,7 +21,7 @@ const response = object().desc("配置key").properties({
             token: string(),
             encodingAESKey: string()
         })
-    }).requiredAll(),
+    }).requireAll(),
     payment: object().desc("微信支付支付").properties({
         appId: string(),
         mchId: string(),
@@ -29,7 +29,7 @@ const response = object().desc("配置key").properties({
         notifyUrl: string(),
         pfxFile: string().desc('微信商户平台证书'),
         refundNotifyUrl: string()
-    }).required('appId', 'mchId', 'key', 'notifyUrl'),
+    }).require('appId', 'mchId', 'key', 'notifyUrl'),
     logDir: string()
 });
 

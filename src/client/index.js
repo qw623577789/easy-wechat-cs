@@ -10,8 +10,7 @@ module.exports = class {
 	async init(host, port) {
         this._client = new BusinessClient({
             host, 
-            port, 
-            schemaDir: `${__dirname}/../server/schema`
+            port
 		});
 
 		let {platform, wxApp, payment, logDir} = await this._request('config.get', null);
