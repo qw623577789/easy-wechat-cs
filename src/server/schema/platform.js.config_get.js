@@ -5,7 +5,10 @@ const info = {
     description: ""
 };
 
-const request = string().desc('调用页url')
+const request = {
+    index: integer(),
+    request: string().desc('调用页url')
+}
 
 const response = {
     appId: string().desc('调用接口提交的公众账号ID'),

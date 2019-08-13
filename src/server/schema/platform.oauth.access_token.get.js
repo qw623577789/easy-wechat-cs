@@ -5,7 +5,10 @@ const info = {
     description: ""
 };
 
-const request = string().desc('前端授权得到的code')
+const request = {
+    index: integer(),
+    request: string().desc('前端授权得到的code')
+}
 
 const response =　object().properties({
     accessToken: string().desc('网页授权接口调用凭证'),

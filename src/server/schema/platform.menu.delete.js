@@ -5,7 +5,11 @@ const info = {
     description: ""
 };
 
-const request = empty()
+const request = {
+    index: integer(),
+    request: empty()
+}
+
 const response =　empty()
 
 module.exports = {info, request, response};

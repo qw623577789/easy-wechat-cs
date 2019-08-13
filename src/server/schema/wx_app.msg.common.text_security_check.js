@@ -5,7 +5,10 @@ const info = {
     description: ""
 };
 
-const request = string().desc('文本');
+const request = {
+    index: integer(),
+    request: string().desc('文本')
+}
 
 const response = boolean();
 

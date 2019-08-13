@@ -5,12 +5,15 @@ const info = {
     description: ""
 };
 
-const request = object().properties({
-    openId: string().desc('用户微信openId'),
-    title: string().desc('标题'),
-    wxAppPath: string().desc('小程序的页面路径'),
-    thumbMediaId: string().desc('小程序消息卡片的封面媒体id')
-}).require('openId', 'title', 'wxAppPath', 'thumbMediaId')
+const request = {
+    index: integer(),
+    request: object().properties({
+        openId: string().desc('用户微信openId'),
+        title: string().desc('标题'),
+        wxAppPath: string().desc('小程序的页面路径'),
+        thumbMediaId: string().desc('小程序消息卡片的封面媒体id')
+    }).require('openId', 'title', 'wxAppPath', 'thumbMediaId')
+}
 
 const response =　empty()
 

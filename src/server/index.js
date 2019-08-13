@@ -52,7 +52,11 @@ module.exports = class {
     }
     
     _initEasyWechat() {
-        global.easyWechat = new EasyWechat(JSON.parse(this._config), this._logPath != undefined ? `${this._logPath}/lib` : undefined);
+        let config = JSON.parse(this._config);
+        global.easyWechats = [].concat(config)
+            .map(_ => {
+                return new EasyWechat(_, this._logPath != undefined ? `${this._logPath}/lib` : undefined);
+            });
     }
 }
 

@@ -1,3 +1,3 @@
-module.exports = async ({request}) => {
-    return await easyWechat.payment.order.create(request);
+module.exports = async ({request: {request, index}}) => {
+    return await easyWechats[index].payment.order.create(request);
 }

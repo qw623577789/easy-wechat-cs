@@ -5,13 +5,16 @@ const info = {
     description: ""
 };
 
-const request = object().properties({
-    openId: string().desc('用户微信openId'),
-    title: string().desc('标题'),
-    description: string().desc('图文链接消息'),
-    url: string().desc('跳转的链接'),
-    thumbUrl: string().desc('图片url')
-}).require('openId', 'title', 'description', 'url', 'thumbUrl')
+const request = {
+    index: integer(),
+    request: object().properties({
+        openId: string().desc('用户微信openId'),
+        title: string().desc('标题'),
+        description: string().desc('图文链接消息'),
+        url: string().desc('跳转的链接'),
+        thumbUrl: string().desc('图片url')
+    }).require('openId', 'title', 'description', 'url', 'thumbUrl')
+}
 
 const response =　empty()
 

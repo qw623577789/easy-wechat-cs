@@ -6,8 +6,11 @@ const info = {
 };
 
 const request = {
-    accessToken: string().desc('access_token'),
-    openId: string().desc('用户微信id')
+    index: integer(),
+    request: {
+        accessToken: string().desc('access_token'),
+        openId: string().desc('用户微信id')
+    }
 }
 
 const response =　boolean().desc('是否失效')

@@ -1,4 +1,6 @@
 module.exports = async () => {
-    let {platform, wxApp, payment} = easyWechat.config;
-    return {platform, wxApp, payment, logDir: easyWechat.logger.logDir};
+    return easyWechats.map(_ => {
+        let {platform, wxApp, payment} = _.config;
+        return {platform, wxApp, payment, logDir: _.logger.logDir};
+    })
 }

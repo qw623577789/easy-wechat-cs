@@ -1,3 +1,3 @@
-module.exports = async ({request}) => {
-    return (await easyWechat.wxApp.qrCode.aGet(request)).toString('base64');
+module.exports = async ({request: {request, index}}) => {
+    return (await easyWechats[index].wxApp.qrCode.aGet(request)).toString('base64');
 }

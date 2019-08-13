@@ -5,7 +5,10 @@ const info = {
     description: ""
 };
 
-const request = string().desc('refresh_token')
+const request = {
+    index: integer(),
+    request: string().desc('refresh_token')
+}
 
 const response =　object().properties({
     accessToken: string().desc('网页授权接口调用凭证'),

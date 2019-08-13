@@ -5,33 +5,38 @@ const info = {
     description: ""
 };
 
-const request = object().properties({
-    orderId: string().pattern(/[A-Za-z0-9\_\-\|\*]{0,32}/).desc('商户订单号'), 
-    description: string().desc('商品简单描述'), 
-    detail: string().desc('商品详细描述'), 
-    price: integer().min(0).desc('价格(单位:分)'), 
-    tradeType: string().enum('JSAPI', 'NATIVE', 'APP').desc('交易类型'), 
-    openId: string().desc('用户微信号'), 
-    spbillCreateIp: string().desc('终端IP'), 
-    attach: string().desc('附加数据'),  
-    startTime: string().desc('交易起始时间(yyyyMMddHHmmss)'), 
-    endTime: string().desc('交易结束时间(yyyyMMddHHmmss)'), 
-    productId: string().desc('商品ID'), 
-    feeType: string().desc('标价币种'), 
-    deviceInfo: string().desc('设备号'), 
-    signType: string().enum('SHA256', 'MD5').desc('签名类型'), 
-    goodsTag: string().desc('订单优惠标记'), 
-    limitPay: string().desc('指定支付方式'), 
-    sceneInfo: string().desc('场景信息'),
-    notifyUrl: string().desc('支付回调地址，若不传，默认使用配置文件里的')
-})
-    .if.properties({tradeType: 'JSAPI'})
-    .then.require('orderId', 'description', 'detail', 'price', 'tradeType', 'openId')
-    .elseIf.properties({tradeType: 'NATIVE'})
-    .then.require('orderId', 'description', 'detail', 'price', 'tradeType', 'productId')
-    .else
-    .require('orderId', 'description', 'detail', 'price', 'tradeType')
-    .endIf
+const request = {
+    index: integer(),
+    request: object().properties({
+        orderId: string().pattern(/[A-Za-z0-9\_\-\|\*]{0,32}/).desc('商户订单号'), 
+        description: string().desc('商品简单描述'), 
+        detail: string().desc('商品详细描述'), 
+        price: integer().min(0).desc('价格(单位:分)'), 
+        tradeType: string().enum('JSAPI', 'NATIVE', 'APP', 'MICROPAY', 'MWEB').desc('交易类型'), 
+        openId: string().desc('用户微信号'), 
+        spbillCreateIp: string().desc('终端IP'), 
+        attach: string().desc('附加数据'),  
+        startTime: string().desc('交易起始时间(yyyyMMddHHmmss)'), 
+        endTime: string().desc('交易结束时间(yyyyMMddHHmmss)'), 
+        productId: string().desc('商品ID'), 
+        feeType: string().desc('标价币种'), 
+        deviceInfo: string().desc('设备号'), 
+        signType: string().enum('SHA256', 'MD5').desc('签名类型'), 
+        goodsTag: string().desc('订单优惠标记'), 
+        limitPay: string().desc('指定支付方式'), 
+        sceneInfo: string().desc('场景信息'),
+        notifyUrl: string().desc('支付回调地址，若不传，默认使用配置文件里的')
+    })
+        .if.properties({tradeType: 'JSAPI'})
+        .then.require('orderId', 'description', 'detail', 'price', 'tradeType', 'openId')
+        .elseIf.properties({tradeType: 'NATIVE'})
+        .then.require('orderId', 'description', 'detail', 'price', 'tradeType', 'productId')
+        .elseIf.properties({tradeType: 'MWEB'})
+        .then.require('orderId', 'description', 'detail', 'price', 'tradeType', 'spbillCreateIp')
+        .else
+        .require('orderId', 'description', 'detail', 'price', 'tradeType')
+        .endIf
+}
 
 const response = object().properties({
     appId: string().desc('调用接口提交的公众账号ID'),
