@@ -1,3 +1,3 @@
-module.exports = async ({request}) => {
-    return await easyWechat.platform.templateMessage.push(request);
+module.exports = async ({request: {request, index}}) => {
+    return await easyWechats[index].platform.templateMessage.push(request);
 }

@@ -1,3 +1,3 @@
-module.exports = async ({request}) => {
-    return await easyWechat.platform.oauth.code.getForUserInfo(request);
+module.exports = async ({request: {request, index}}) => {
+    return await easyWechats[index].platform.oauth.code.getForUserInfo(request);
 }

@@ -5,7 +5,9 @@ const info = {
     description: ""
 };
 
-const request = object().properties({
+const request = {
+    index: integer(),
+    request: object().properties({
     encryptedData: string().desc('原始数据字符串'),
     iv: string().desc('加密算法的初始向量'),
     sessionKey: string().desc('登录流程获取会话密钥'),

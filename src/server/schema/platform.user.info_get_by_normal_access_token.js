@@ -5,7 +5,10 @@ const info = {
     description: ""
 };
 
-const request = string().desc('用户微信id');
+const request = {
+    index: integer(),
+    request: string().desc('用户微信id')
+};
 
 const response =　oneOf(
     {

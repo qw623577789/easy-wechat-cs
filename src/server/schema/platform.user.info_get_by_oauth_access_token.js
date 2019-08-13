@@ -6,8 +6,11 @@ const info = {
 };
 
 const request = {
-    accessToken: string().desc('前端授权得到的accessToken'),
-    openId: string().desc('用户微信id')
+    index: integer(),
+    request: {
+        accessToken: string().desc('前端授权得到的accessToken'),
+        openId: string().desc('用户微信id')
+    }
 }
 
 const response =　object().properties({

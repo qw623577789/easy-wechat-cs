@@ -5,7 +5,10 @@ const info = {
     description: "获取sessionKey,openId"
 };
 
-const request = string().desc('临时登录凭证')
+const request = {
+    index: integer(),
+    request: string().desc('临时登录凭证')
+}
 
 const response =　object().properties({
     openId: string().desc('用户微信id'),

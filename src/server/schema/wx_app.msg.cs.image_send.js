@@ -5,10 +5,13 @@ const info = {
     description: ""
 };
 
-const request = object().properties({
-    openId: string().desc('用户微信openId'),
-    mediaId: string().desc('媒体id')
-}).require('openId', 'mediaId')
+const request = {
+    index: integer(),
+    request: object().properties({
+        openId: string().desc('用户微信openId'),
+        mediaId: string().desc('媒体id')
+    }).require('openId', 'mediaId')
+}
 
 const response =　empty()
 

@@ -5,21 +5,24 @@ const info = {
     description: ""
 };
 
-const request = object().properties({
-    pagePath: string().maxLength(128).desc('已经发布的小程序存在的页面'),
-    width: integer().desc('二维码的宽度'),
-    autoColor: boolean().desc('自动配置线条颜色'),
-    lineColor: {
-        r: integer(),
-        g: integer(),
-        b: integer()
-    },
-    isHyaline: boolean().desc('是否需要透明底色')
-})
-    .if.properties({autoColor: true})
-    .then.require('pagePath', 'autoColor', 'lineColor')
-    .else.require('pagePath')
-    .endIf
+const request = {
+    index: integer(),
+    request: object().properties({
+        pagePath: string().maxLength(128).desc('已经发布的小程序存在的页面'),
+        width: integer().desc('二维码的宽度'),
+        autoColor: boolean().desc('自动配置线条颜色'),
+        lineColor: {
+            r: integer(),
+            g: integer(),
+            b: integer()
+        },
+        isHyaline: boolean().desc('是否需要透明底色')
+    })
+        .if.properties({autoColor: true})
+        .then.require('pagePath', 'autoColor', 'lineColor')
+        .else.require('pagePath')
+        .endIf
+}
 
 const response =　string();
 

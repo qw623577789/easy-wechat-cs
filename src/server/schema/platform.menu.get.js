@@ -5,7 +5,10 @@ const info = {
     description: ""
 };
 
-const request = empty()
+const request = {
+    index: integer(),
+    request: empty()
+}
 
 const subButton = array().desc('二级菜单').item(
     oneOf(

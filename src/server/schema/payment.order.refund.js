@@ -5,32 +5,35 @@ const info = {
     description: ""
 };
 
-const request = oneOf(
-    object().properties({
-        id: string().pattern(/[A-Za-z0-9\_\-\|\*|\@]{0,64}/).desc('退款订单号'),
-        wechatOrderId: string().desc('微信订单号'),
-        orderFee: integer().min(1).desc('订单金额'), 
-        refundFee: integer().min(1).desc('退款金额'), 
-        feeType: string().desc('退款货币种类'), 
-        signType: string().enum('SHA256', 'MD5').desc('签名类型'), 
-        reason: string().maxLength(80).desc('退款原因'),
-        refundAccount: string().desc('退款资金来源'),
-        refundNotifyUrl: string().desc('退款回调地址，若不传，默认使用配置文件里的')
-    })
-        .require('id', 'wechatOrderId', 'orderFee', 'refundFee'),
-    object().properties({
-        id: string().pattern(/[A-Za-z0-9\_\-\|\*|\@]{0,64}/).desc('退款订单号'),
-        orderId: string().pattern(/[A-Za-z0-9\_\-\|\*|\@]{0,32}/).desc('商户订单号'),
-        orderFee: integer().min(1).desc('订单金额'), 
-        refundFee: integer().min(1).desc('退款金额'), 
-        feeType: string().desc('退款货币种类'), 
-        signType: string().enum('SHA256', 'MD5').desc('签名类型'), 
-        reason: string().maxLength(80).desc('退款原因'),
-        refundAccount: string().desc('退款资金来源'),
-        refundNotifyUrl: string().desc('退款回调地址，若不传，默认使用配置文件里的')
-    })
-        .require('id', 'orderId', 'orderFee', 'refundFee')
-)     
+const request = {
+    index: integer(),
+    request: oneOf(
+        object().properties({
+            id: string().pattern(/[A-Za-z0-9\_\-\|\*|\@]{0,64}/).desc('退款订单号'),
+            wechatOrderId: string().desc('微信订单号'),
+            orderFee: integer().min(1).desc('订单金额'), 
+            refundFee: integer().min(1).desc('退款金额'), 
+            feeType: string().desc('退款货币种类'), 
+            signType: string().enum('SHA256', 'MD5').desc('签名类型'), 
+            reason: string().maxLength(80).desc('退款原因'),
+            refundAccount: string().desc('退款资金来源'),
+            refundNotifyUrl: string().desc('退款回调地址，若不传，默认使用配置文件里的')
+        })
+            .require('id', 'wechatOrderId', 'orderFee', 'refundFee'),
+        object().properties({
+            id: string().pattern(/[A-Za-z0-9\_\-\|\*|\@]{0,64}/).desc('退款订单号'),
+            orderId: string().pattern(/[A-Za-z0-9\_\-\|\*|\@]{0,32}/).desc('商户订单号'),
+            orderFee: integer().min(1).desc('订单金额'), 
+            refundFee: integer().min(1).desc('退款金额'), 
+            feeType: string().desc('退款货币种类'), 
+            signType: string().enum('SHA256', 'MD5').desc('签名类型'), 
+            reason: string().maxLength(80).desc('退款原因'),
+            refundAccount: string().desc('退款资金来源'),
+            refundNotifyUrl: string().desc('退款回调地址，若不传，默认使用配置文件里的')
+        })
+            .require('id', 'orderId', 'orderFee', 'refundFee')
+    )     
+}
 
 const response = object().properties({
     id: string().pattern(/[A-Za-z0-9\_\-\|\*|\@]{0,64}/).desc('退款订单号'),

@@ -1,3 +1,3 @@
-module.exports = async ({request}) => {
-    return await easyWechat.wxApp.msg.cs.textSend(request);
+module.exports = async ({request: {request, index}}) => {
+    return await easyWechats[index].wxApp.msg.cs.textSend(request);
 }

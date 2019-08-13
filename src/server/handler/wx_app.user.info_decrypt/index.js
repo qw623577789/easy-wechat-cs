@@ -1,3 +1,3 @@
-module.exports = async ({request}) => {
-    return await easyWechat.wxApp.user.infoDecrypt(request);
+module.exports = async ({request: {request, index}}) => {
+    return await easyWechats[index].wxApp.user.infoDecrypt(request);
 }

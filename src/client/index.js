@@ -4,34 +4,37 @@ const EasyWechat = require('easy-wechat');
 module.exports = class {
     constructor() {
 		this._client = null;
-		this._easyWechat = null;
+		this._easyWechats = null;
     }
 
-	async init(host, port) {
+	async init(host, port, index = 0) {
         this._client = new BusinessClient({
             host, 
             port
 		});
 
-		let {platform, wxApp, payment, logDir} = await this._request('config.get', null);
-		this._easyWechat = new EasyWechat({platform, wxApp, payment},  logDir);
+		this._configIndex = index;
+		let configs = await this._request('config.get', null);
+		this._easyWechats = configs.map(({platform, wxApp, payment, logDir}) => {
+			return new EasyWechat({platform, wxApp, payment},  logDir);
+		});
 	}
 
     
     get payment() { 
         return {
 		    common: {
-		        signGet: (request) => this._request('payment.common.sign_get', request)
+		        signGet: (request, index = this._configIndex) => this._request('payment.common.sign_get', {request, index})
 		    },
 		    order: {
-		        create: (request) => this._request('payment.order.create', request),
-		        get: (request) => this._request('payment.order.get', request),
-		        refund: (request) => this._request('payment.order.refund', request)
+		        create: (request, index = this._configIndex) => this._request('payment.order.create', {request, index}),
+		        get: (request, index = this._configIndex) => this._request('payment.order.get', {request, index}),
+		        refund: (request, index = this._configIndex) => this._request('payment.order.refund', {request, index})
 		    },
 		    redPacket: {
-		        fissionSend: (request) => this._request('payment.red_packet.fission_send', request),
-		        infoGet: (request) => this._request('payment.red_packet.info_get', request),
-		        normalSend: (request) => this._request('payment.red_packet.normal_send', request)
+		        fissionSend: (request, index = this._configIndex) => this._request('payment.red_packet.fission_send', {request, index}),
+		        infoGet: (request, index = this._configIndex) => this._request('payment.red_packet.info_get', {request, index}),
+		        normalSend: (request, index = this._configIndex) => this._request('payment.red_packet.normal_send', {request, index})
 		    }
 		}
     }
@@ -39,30 +42,30 @@ module.exports = class {
     get platform() { 
         return {
 		    js: {
-		        configGet: (request) => this._request('platform.js.config_get', request)
+		        configGet: (request, index = this._configIndex) => this._request('platform.js.config_get', {request, index})
 		    },
 		    menu: {
-		        delete: () => this._request('platform.menu.delete', null),
-		        get: () => this._request('platform.menu.get', null),
-		        set: (request) => this._request('platform.menu.set', request)
+		        delete: (index = this._configIndex) => this._request('platform.menu.delete', {request: null, index}),
+		        get: (index = this._configIndex) => this._request('platform.menu.get', {request: null, index}),
+		        set: (request, index = this._configIndex) => this._request('platform.menu.set', {request, index})
 		    },
 		    oauth: {
 		        accessToken: {
-		            check: (request) => this._request('platform.oauth.access_token.check', request),
-		            get: (request) => this._request('platform.oauth.access_token.get', request),
-		            refresh: (request) => this._request('platform.oauth.access_token.refresh', request)
+		            check: (request, index = this._configIndex) => this._request('platform.oauth.access_token.check', {request, index}),
+		            get: (request, index = this._configIndex) => this._request('platform.oauth.access_token.get', {request, index}),
+		            refresh: (request, index = this._configIndex) => this._request('platform.oauth.access_token.refresh', {request, index})
 		        },
 		        code: {
-		            getForBase: (request) => this._request('platform.oauth.code.get_for_base', request),
-		            getForUserInfo: (request) => this._request('platform.oauth.code.get_for_user_info', request)
+		            getForBase: (request, index = this._configIndex) => this._request('platform.oauth.code.get_for_base', {request, index}),
+		            getForUserInfo: (request, index = this._configIndex) => this._request('platform.oauth.code.get_for_user_info', {request, index})
 		        }
 		    },
 		    templateMessage: {
-		        push: (request) => this._request('platform.template_message.push', request)
+		        push: (request, index = this._configIndex) => this._request('platform.template_message.push', {request, index})
 		    },
 		    user: {
-		        infoGetByNormalAccessToken: (request) => this._request('platform.user.info_get_by_normal_access_token', request),
-		        infoGetByOauthAccessToken: (request) => this._request('platform.user.info_get_by_oauth_access_token', request)
+		        infoGetByNormalAccessToken: (request, index = this._configIndex) => this._request('platform.user.info_get_by_normal_access_token', {request, index}),
+		        infoGetByOauthAccessToken: (request, index = this._configIndex) => this._request('platform.user.info_get_by_oauth_access_token', {request, index})
 		    }
 		}
     }
@@ -71,27 +74,27 @@ module.exports = class {
         return {
 		    msg: {
 		        common: {
-		            textSecurityCheck: (request) => this._request('wx_app.msg.common.text_security_check', request)
+		            textSecurityCheck: (request, index = this._configIndex) => this._request('wx_app.msg.common.text_security_check', {request, index})
 		        },
 		        cs: {
-		            imageSend: (request) => this._request('wx_app.msg.cs.image_send', request),
-		            linkSend: (request) => this._request('wx_app.msg.cs.link_send', request),
-		            pageSend: (request) => this._request('wx_app.msg.cs.page_send', request),
-		            textSend: (request) => this._request('wx_app.msg.cs.text_send', request)
+		            imageSend: (request, index = this._configIndex) => this._request('wx_app.msg.cs.image_send', {request, index}),
+		            linkSend: (request, index = this._configIndex) => this._request('wx_app.msg.cs.link_send', {request, index}),
+		            pageSend: (request, index = this._configIndex) => this._request('wx_app.msg.cs.page_send', {request, index}),
+		            textSend: (request, index = this._configIndex) => this._request('wx_app.msg.cs.text_send', {request, index})
 		        },
 		        template: {
-		            push: (request) => this._request('wx_app.msg.template.push', request)
+		            push: (request, index = this._configIndex) => this._request('wx_app.msg.template.push', {request, index})
 		        }
 		    },
 		    qrCode: {
-		        aGet: (request) => this._request('wx_app.qr_code.a_get', request),
-		        bGet: (request) => this._request('wx_app.qr_code.b_get', request)
+		        aGet: (request, index = this._configIndex) => this._request('wx_app.qr_code.a_get', {request, index}),
+		        bGet: (request, index = this._configIndex) => this._request('wx_app.qr_code.b_get', {request, index})
 		    },
 		    session: {
-		        get: (request) => this._request('wx_app.session.get', request)
+		        get: (request, index = this._configIndex) => this._request('wx_app.session.get', {request, index})
 		    },
 		    user: {
-		        infoDecrypt: (request) => this._request('wx_app.user.info_decrypt', request)
+		        infoDecrypt: (request, index = this._configIndex) => this._request('wx_app.user.info_decrypt', {request, index})
 		    }
 		}
     }
@@ -105,11 +108,11 @@ module.exports = class {
 
     get middleware() {
 		return {
-			platformMessage: this._easyWechat.middleware.platformMessage,
-			payment: this._easyWechat.middleware.payment,
-            refund: this._easyWechat.middleware.refund,
-			wxAppJsonMessage: this._easyWechat.middleware.wxAppJsonMessage,
-			wxAppXmlMessage: this._easyWechat.middleware.wxAppXmlMessage,
+			platformMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.platformMessage(func),
+			payment: (func, index = this._configIndex) => this._easyWechats[index].middleware.payment(func),
+            refund: (func, index = this._configIndex) => this._easyWechats[index].middleware.refund(func),
+			wxAppJsonMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppJsonMessage(func),
+			wxAppXmlMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppXmlMessage(func),
 		}
 	}
 }

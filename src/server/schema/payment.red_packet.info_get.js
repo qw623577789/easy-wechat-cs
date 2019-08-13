@@ -5,10 +5,13 @@ const info = {
     description: ""
 };
 
-const request = object().properties({
-    orderId: string().pattern(/[A-Za-z0-9]{0,28}/).desc('商户订单号'), 
-    signType: string().enum('SHA256', 'MD5').desc('签名类型'),
-}).require('orderId')
+const request = {
+    index: integer(),
+    request: object().properties({
+        orderId: string().pattern(/[A-Za-z0-9]{0,28}/).desc('商户订单号'), 
+        signType: string().enum('SHA256', 'MD5').desc('签名类型'),
+    }).require('orderId')
+}
 
 const response = object().properties({
     orderId: string().desc('商户订单号'),
