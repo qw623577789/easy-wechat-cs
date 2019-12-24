@@ -4,18 +4,20 @@ const EasyWechat = require('easy-wechat');
 module.exports = class {
     constructor() {
 		this._client = null;
-		this._easyWechat = null;
+		this._easyWechats = null;
     }
 
-	async init(host, port) {
+	async init(host, port, index = 0) {
         this._client = new BusinessClient({
             host, 
-            port, 
-            schemaDir: `${__dirname}/../server/schema`
+            port
 		});
 
-		let {platform, wxApp, payment, logDir} = await this._request('config.get', null);
-		this._easyWechat = new EasyWechat({platform, wxApp, payment},  logDir);
+		this._configIndex = index;
+		let configs = await this._request('config.get', null);
+		this._easyWechats = configs.map(({platform, wxApp, payment, logDir}) => {
+			return new EasyWechat({platform, wxApp, payment},  logDir);
+		});
 	}
 
     <% Object.keys(functionObj).forEach(nameSpace => { %>
@@ -32,11 +34,11 @@ module.exports = class {
 
     get middleware() {
 		return {
-			platformMessage: this._easyWechat.middleware.platformMessage,
-			payment: this._easyWechat.middleware.payment,
-            refund: this._easyWechat.middleware.refund,
-			wxAppJsonMessage: this._easyWechat.middleware.wxAppJsonMessage,
-			wxAppXmlMessage: this._easyWechat.middleware.wxAppXmlMessage,
+			platformMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.platformMessage(func),
+			payment: (func, index = this._configIndex) => this._easyWechats[index].middleware.payment(func),
+            refund: (func, index = this._configIndex) => this._easyWechats[index].middleware.refund(func),
+			wxAppJsonMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppJsonMessage(func),
+			wxAppXmlMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppXmlMessage(func),
 		}
 	}
 }
@@ -45,7 +47,7 @@ module.exports = class {
 <%
     function build(obj) { 
         if (obj.name != undefined && obj.hasParams != undefined) {
-            return `(${obj.hasParams ? 'request':''}) => this._request('${obj.name}', ${obj.hasParams ? 'request':'null'})`;
+            return `(${obj.hasParams ? 'request, ':''}index = this._configIndex) => this._request('${obj.name}', {${obj.hasParams ? 'request, ':'request: null, '}index})`;
         }
         else {
             return Object.keys(obj).reduce((prev, key) => {

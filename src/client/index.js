@@ -83,7 +83,8 @@ module.exports = class {
 		            textSend: (request, index = this._configIndex) => this._request('wx_app.msg.cs.text_send', {request, index})
 		        },
 		        template: {
-		            push: (request, index = this._configIndex) => this._request('wx_app.msg.template.push', {request, index})
+		            push: (request, index = this._configIndex) => this._request('wx_app.msg.template.push', {request, index}),
+		            subscribeSend: (request, index = this._configIndex) => this._request('wx_app.msg.template.subscribe_send', {request, index})
 		        }
 		    },
 		    qrCode: {
