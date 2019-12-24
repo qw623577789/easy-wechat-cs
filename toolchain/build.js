@@ -5,7 +5,7 @@ const walk = require('klaw-sync');
 const path = require('path');
 const fs = require('fs');
 const PROJECT_ROOT = `${__dirname}/../`;
-
+const qtkSchema = require('@qtk/schema');
 let schemas = walk(`${__dirname}/../node_modules/easy-wechat/src/schema`, {nodir: true});
 let newSchemas = schemas.filter(({path: filePath}) => !fs.existsSync(`${__dirname}/../src/server/handler/${path.basename(filePath, '.js')}/index.js`));
 
@@ -43,8 +43,13 @@ fs.writeFileSync(
                 if (index == splitArray.length - 1) {
                     if (obj[key] == undefined) {
                         let request = require(filePath).request;
+                        request = qtkSchema.validator.from(request)
+                            .jsonSchema;
                         obj[key] = {
-                            hasParams: request == null || (typeof request == 'object' && typeof request._schema == 'object' && request._schema.type == "null") ? false : true,
+                            hasParams: request == null || (
+                                typeof request == 'object' && 
+                                request.type == "null"
+                            ) ? false : true,
                             name: fileName
                         };
                     }
