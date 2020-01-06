@@ -44,7 +44,7 @@ const response = object().properties({
     nonceStr: string().desc('随机字符串'),
     sign: string().desc('签名值'),
     resultCode: string().enum('SUCCESS', 'FAIL').desc('业务结果'),
-    tradeType: string().enum('JSAPI', 'NATIVE', 'APP').desc('交易类型'),
+    tradeType: string().enum('JSAPI', 'NATIVE', 'APP', 'MICROPAY', 'MWEB').desc('交易类型'),
     prepayId: string().desc('预支付交易会话标识'),
     codeUrl: string().desc('二维码链接'),
     deviceInfo: string().desc('设备号'),
