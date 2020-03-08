@@ -21,6 +21,21 @@ module.exports = class {
 	}
 
     
+    get app() { 
+        return {
+		    oauth: {
+		        accessToken: {
+		            check: (request, index = this._configIndex) => this._request('app.oauth.access_token.check', {request, index}),
+		            get: (request, index = this._configIndex) => this._request('app.oauth.access_token.get', {request, index}),
+		            refresh: (request, index = this._configIndex) => this._request('app.oauth.access_token.refresh', {request, index})
+		        }
+		    },
+		    user: {
+		        infoGetByOauthAccessToken: (request, index = this._configIndex) => this._request('app.user.info_get_by_oauth_access_token', {request, index})
+		    }
+		}
+    }
+    
     get payment() { 
         return {
 		    common: {
