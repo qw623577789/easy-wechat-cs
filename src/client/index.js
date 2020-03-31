@@ -88,9 +88,6 @@ module.exports = class {
     get wxApp() { 
         return {
 		    msg: {
-		        common: {
-		            textSecurityCheck: (request, index = this._configIndex) => this._request('wx_app.msg.common.text_security_check', {request, index})
-		        },
 		        cs: {
 		            imageSend: (request, index = this._configIndex) => this._request('wx_app.msg.cs.image_send', {request, index}),
 		            linkSend: (request, index = this._configIndex) => this._request('wx_app.msg.cs.link_send', {request, index}),
@@ -105,6 +102,10 @@ module.exports = class {
 		    qrCode: {
 		        aGet: (request, index = this._configIndex) => this._request('wx_app.qr_code.a_get', {request, index}),
 		        bGet: (request, index = this._configIndex) => this._request('wx_app.qr_code.b_get', {request, index})
+		    },
+		    security: {
+		        imgCheck: (request, index = this._configIndex) => this._request('wx_app.security.img_check', {request, index}),
+		        textCheck: (request, index = this._configIndex) => this._request('wx_app.security.text_check', {request, index})
 		    },
 		    session: {
 		        get: (request, index = this._configIndex) => this._request('wx_app.session.get', {request, index})
