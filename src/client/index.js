@@ -56,6 +56,14 @@ module.exports = class {
     
     get platform() { 
         return {
+		    cs: {
+		        add: (request, index = this._configIndex) => this._request('platform.cs.add', {request, index}),
+		        avatarUpdate: (request, index = this._configIndex) => this._request('platform.cs.avatar_update', {request, index}),
+		        bind: (request, index = this._configIndex) => this._request('platform.cs.bind', {request, index}),
+		        delete: (request, index = this._configIndex) => this._request('platform.cs.delete', {request, index}),
+		        list: (index = this._configIndex) => this._request('platform.cs.list', {request: null, index}),
+		        nicknameUpdate: (request, index = this._configIndex) => this._request('platform.cs.nickname_update', {request, index})
+		    },
 		    js: {
 		        configGet: (request, index = this._configIndex) => this._request('platform.js.config_get', {request, index})
 		    },
@@ -63,6 +71,24 @@ module.exports = class {
 		        delete: (index = this._configIndex) => this._request('platform.menu.delete', {request: null, index}),
 		        get: (index = this._configIndex) => this._request('platform.menu.get', {request: null, index}),
 		        set: (request, index = this._configIndex) => this._request('platform.menu.set', {request, index})
+		    },
+		    msg: {
+		        cs: {
+		            cardSend: (request, index = this._configIndex) => this._request('platform.msg.cs.card_send', {request, index}),
+		            imageSend: (request, index = this._configIndex) => this._request('platform.msg.cs.image_send', {request, index}),
+		            menuSend: (request, index = this._configIndex) => this._request('platform.msg.cs.menu_send', {request, index}),
+		            mpArticleSend: (request, index = this._configIndex) => this._request('platform.msg.cs.mp_article_send', {request, index}),
+		            musicSend: (request, index = this._configIndex) => this._request('platform.msg.cs.music_send', {request, index}),
+		            outsideArticleSend: (request, index = this._configIndex) => this._request('platform.msg.cs.outside_article_send', {request, index}),
+		            textSend: (request, index = this._configIndex) => this._request('platform.msg.cs.text_send', {request, index}),
+		            typingSet: (request, index = this._configIndex) => this._request('platform.msg.cs.typing_set', {request, index}),
+		            videoSend: (request, index = this._configIndex) => this._request('platform.msg.cs.video_send', {request, index}),
+		            voiceSend: (request, index = this._configIndex) => this._request('platform.msg.cs.voice_send', {request, index}),
+		            wxAppSend: (request, index = this._configIndex) => this._request('platform.msg.cs.wx_app_send', {request, index})
+		        },
+		        template: {
+		            push: (request, index = this._configIndex) => this._request('platform.msg.template.push', {request, index})
+		        }
 		    },
 		    oauth: {
 		        accessToken: {
@@ -74,9 +100,6 @@ module.exports = class {
 		            getForBase: (request, index = this._configIndex) => this._request('platform.oauth.code.get_for_base', {request, index}),
 		            getForUserInfo: (request, index = this._configIndex) => this._request('platform.oauth.code.get_for_user_info', {request, index})
 		        }
-		    },
-		    templateMessage: {
-		        push: (request, index = this._configIndex) => this._request('platform.template_message.push', {request, index})
 		    },
 		    user: {
 		        infoGetByNormalAccessToken: (request, index = this._configIndex) => this._request('platform.user.info_get_by_normal_access_token', {request, index}),
