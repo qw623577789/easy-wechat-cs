@@ -101,6 +101,10 @@ module.exports = class {
 		            getForUserInfo: (request, index = this._configIndex) => this._request('platform.oauth.code.get_for_user_info', {request, index})
 		        }
 		    },
+		    resource: {
+		        permanentUpload: (request, index = this._configIndex) => this._request('platform.resource.permanent_upload', {request, index}),
+		        temporaryUpload: (request, index = this._configIndex) => this._request('platform.resource.temporary_upload', {request, index})
+		    },
 		    user: {
 		        infoGetByNormalAccessToken: (request, index = this._configIndex) => this._request('platform.user.info_get_by_normal_access_token', {request, index}),
 		        infoGetByOauthAccessToken: (request, index = this._configIndex) => this._request('platform.user.info_get_by_oauth_access_token', {request, index})
