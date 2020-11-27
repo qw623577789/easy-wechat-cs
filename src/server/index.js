@@ -22,8 +22,8 @@ module.exports = class {
                     pattern: "yyyy-MM-dd.log",
                     alwaysIncludePattern: true
                 } : {
-                    type: 'console'
-                }
+                        type: 'console'
+                    }
             },
             categories: {
                 default: { appenders: ['runtime'], level: "ALL" }
@@ -31,7 +31,7 @@ module.exports = class {
         });
         global.Logger = Log4js.getLogger('default');
     }
-    
+
     _initServer() {
         global.server = new TcpServer({
             host: this._host,
@@ -39,18 +39,18 @@ module.exports = class {
             handlerDir: `${__dirname}/handler`,
             schemaDir: `${__dirname}/schema`
         });
-        
+
         server.on("exception", (socket, err) => {
             Logger.error(`internal server error: `, err.stack);
         });
-        
+
         server.on("started", () => {
             Logger.info(`server started at: ${this._host}:${this._port}`);
         });
-    
+
         server.start();
     }
-    
+
     _initEasyWechat() {
         let config = JSON.parse(this._config);
         global.easyWechats = [].concat(config)

@@ -14,6 +14,6 @@ const request = {
     }).require('scene')
 }
 
-const response = string('二维码url');
+const response = string().desc('二维码url');
 
 module.exports = { info, request, response };
