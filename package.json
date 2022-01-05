@@ -1,6 +1,6 @@
 {
   "name": "easy-wechat-cs",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "@qtk/schema": "^0.0.7",
     "@qtk/schema-tcp-request-framework": "^2.3.3",
-    "easy-wechat": "^5.1.0",
+    "easy-wechat": "^5.2.0",
     "log4js": "^2.9.0",
     "opts": "^1.2.6",
     "path": "^0.12.7"

@@ -459,10 +459,10 @@ double-ended-queue@^2.1.0-0:
   resolved "https://registry.yarnpkg.com/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
   integrity sha1-ED01J/0xUo9AGIEwyEHv3XgmTlw=
 
-easy-wechat@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/easy-wechat/-/easy-wechat-5.0.1.tgz#104d35f257a8a402e6117086813344fcda56b4e7"
-  integrity sha512-PvhEWK98qAtN6GsBjh7lDjNTsRlDndlZ2BzcE8wPLzFiECfgfE74NDmJlJMwMO9Nxk/Pjrje50VruwntJDIsAg==
+easy-wechat@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.npmjs.org/easy-wechat/-/easy-wechat-5.2.0.tgz#3f5a4ab4651b228f5fbd07022932ce23da200c20"
+  integrity sha512-OgEhpX/Dd/Wjv69hCezk1PSlMe0mg95rNoTR6Olqo1YlXK0j89COvPPWwuYFqznb+3GdwnObORb/FG+ZBUa6Ig==
   dependencies:
     "@qtk/schema" "0.0.7"
     assert "^1.4.1"
