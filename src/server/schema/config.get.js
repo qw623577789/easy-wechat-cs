@@ -15,6 +15,13 @@ const response = array(
             token: string(),
             aesKey: string()
         }).require("appId", "secret"),
+        work: object().desc("企业微信配置信息").properties({
+            corpId: string().desc("企业id"),
+            appId: string().desc("自建应用id"),
+            secret: string().desc("自建应用秘钥"),
+            token: string(),
+            aesKey: string()
+        }).require("corpId", "appId", "secret"),
         wxApp: object().desc("微信小程序配置").properties({
             appId: string(),
             secret: string(),
