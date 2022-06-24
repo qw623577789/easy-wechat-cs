@@ -507,6 +507,52 @@ describe("test", function() {
         console.log(response)
         assert(typeof response === 'string', response);
     });
+
+    it('work.oauth.code.get_for_user_info', async function () {
+        const response = await client.work.oauth.code.getForUserInfo({
+            redirectUrl: 'http://matrix.qbao100.com/forward/10.10.1.50/5200/auth_callback'
+        });
+        console.log(response)
+    });
+
+    it('work.oauth.code.get_for_base', async function () {
+        const response = await client.work.oauth.code.getForBase({
+            redirectUrl: 'xxxxxxxxxx'
+        });
+        console.log(response)
+    });
+
+    it('work.js.config.get', async function () {
+        const response = await client.work.js.configGet('xxxxxxxxxxx');
+        console.log(response)
+    });
+
+    it('work.user.info_get_by_code', async function () {
+        const response = await client.work.user.infoGetByCode("xxxxxxxxxxx");
+        console.log(response)
+    });
+
+    it('work.user.info_get_by_auth_user_ticket', async function () {
+        const response = await client.work.user.infoGetByAuthUserTicket("xxxxxxxxxxxxx");
+        console.log(response)
+    });
+
+    it('work.user.info_get_by_user_id', async function () {
+        const response = await client.work.user.infoGetByUserId("xxxxxxx");
+        console.log(response)
+    });
+
+    it('work.user_id.get_by_mobile', async function () {
+        const response = await client.work.userId.getByMobile("xxxxxxxxxxxx");
+        console.log(response)
+    });
+
+    it('work.qr_code.login_get', async function () {
+        const response = await client.work.qrCode.loginGet({
+            redirectUrl: 'xxxxxxxx'
+        });
+        console.log(response)
+    });
 });
 
 

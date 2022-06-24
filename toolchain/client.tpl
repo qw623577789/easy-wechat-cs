@@ -15,8 +15,8 @@ module.exports = class {
 
 		this._configIndex = index;
 		let configs = await this._request('config.get', null);
-		this._easyWechats = configs.map(({platform, wxApp, payment, logDir}) => {
-			return new EasyWechat({platform, wxApp, payment},  logDir);
+		this._easyWechats = configs.map(({platform, work, wxApp, payment, logDir}) => {
+			return new EasyWechat({platform, work, wxApp, payment},  logDir);
 		});
 	}
 
@@ -35,7 +35,8 @@ module.exports = class {
     get middleware() {
 		return {
 			platformMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.platformMessage(func),
-			payment: (func, index = this._configIndex) => this._easyWechats[index].middleware.payment(func),
+			workMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.workMessage(func),
+            payment: (func, index = this._configIndex) => this._easyWechats[index].middleware.payment(func),
             refund: (func, index = this._configIndex) => this._easyWechats[index].middleware.refund(func),
 			wxAppJsonMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppJsonMessage(func),
 			wxAppXmlMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppXmlMessage(func),

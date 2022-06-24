@@ -15,8 +15,8 @@ module.exports = class {
 
 		this._configIndex = index;
 		let configs = await this._request('config.get', null);
-		this._easyWechats = configs.map(({ platform, wxApp, payment, logDir }) => {
-			return new EasyWechat({ platform, wxApp, payment }, logDir);
+		this._easyWechats = configs.map(({ platform, work, wxApp, payment, logDir }) => {
+			return new EasyWechat({ platform, work, wxApp, payment }, logDir);
 		});
 	}
 
@@ -101,6 +101,9 @@ module.exports = class {
 					getForUserInfo: (request, index = this._configIndex) => this._request('platform.oauth.code.get_for_user_info', { request, index })
 				}
 			},
+			qrCode: {
+				get: (request, index = this._configIndex) => this._request('platform.qr_code.get', { request, index })
+			},
 			resource: {
 				permanentUpload: (request, index = this._configIndex) => this._request('platform.resource.permanent_upload', { request, index }),
 				temporaryUpload: (request, index = this._configIndex) => this._request('platform.resource.temporary_upload', { request, index })
@@ -108,9 +111,56 @@ module.exports = class {
 			user: {
 				infoGetByNormalAccessToken: (request, index = this._configIndex) => this._request('platform.user.info_get_by_normal_access_token', { request, index }),
 				infoGetByOauthAccessToken: (request, index = this._configIndex) => this._request('platform.user.info_get_by_oauth_access_token', { request, index })
+			}
+		}
+	}
+
+	get work() {
+		return {
+			js: {
+				configGet: (request, index = this._configIndex) => this._request('work.js.config_get', { request, index })
+			},
+			msg: {
+				app: {
+					fileSend: (request, index = this._configIndex) => this._request('work.msg.app.file_send', { request, index }),
+					imageSend: (request, index = this._configIndex) => this._request('work.msg.app.image_send', { request, index }),
+					markdownSend: (request, index = this._configIndex) => this._request('work.msg.app.markdown_send', { request, index }),
+					mpArticleSend: (request, index = this._configIndex) => this._request('work.msg.app.mp_article_send', { request, index }),
+					outsideArticleSend: (request, index = this._configIndex) => this._request('work.msg.app.outside_article_send', { request, index }),
+					textCardSend: (request, index = this._configIndex) => this._request('work.msg.app.text_card_send', { request, index }),
+					textSend: (request, index = this._configIndex) => this._request('work.msg.app.text_send', { request, index }),
+					videoSend: (request, index = this._configIndex) => this._request('work.msg.app.video_send', { request, index }),
+					voiceSend: (request, index = this._configIndex) => this._request('work.msg.app.voice_send', { request, index }),
+					wxAppSend: (request, index = this._configIndex) => this._request('work.msg.app.wx_app_send', { request, index })
+				}
+			},
+			oauth: {
+				accessToken: {
+					get: (index = this._configIndex) => this._request('work.oauth.access_token.get', { request: null, index })
+				},
+				code: {
+					getForBase: (request, index = this._configIndex) => this._request('work.oauth.code.get_for_base', { request, index }),
+					getForUserInfo: (request, index = this._configIndex) => this._request('work.oauth.code.get_for_user_info', { request, index })
+				}
 			},
 			qrCode: {
-				get: (request, index = this._configIndex) => this._request('platform.qr_code.get', { request, index })
+				loginGet: (request, index = this._configIndex) => this._request('work.qr_code.login_get', { request, index })
+			},
+			resource: {
+				permanentUpload: (request, index = this._configIndex) => this._request('work.resource.permanent_upload', { request, index }),
+				temporaryUpload: (request, index = this._configIndex) => this._request('work.resource.temporary_upload', { request, index })
+			},
+			user: {
+				infoGetByAuthUserTicket: (request, index = this._configIndex) => this._request('work.user.info_get_by_auth_user_ticket', { request, index }),
+				infoGetByCode: (request, index = this._configIndex) => this._request('work.user.info_get_by_code', { request, index }),
+				infoGetByUserId: (request, index = this._configIndex) => this._request('work.user.info_get_by_user_id', { request, index })
+			},
+			userId: {
+				getByMobile: (request, index = this._configIndex) => this._request('work.user_id.get_by_mobile', { request, index }),
+				getByWxOpenId: (request, index = this._configIndex) => this._request('work.user_id.get_by_wx_open_id', { request, index })
+			},
+			wxOpenId: {
+				getByUserId: (request, index = this._configIndex) => this._request('work.wx_open_id.get_by_user_id', { request, index })
 			}
 		}
 	}
@@ -156,6 +206,7 @@ module.exports = class {
 	get middleware() {
 		return {
 			platformMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.platformMessage(func),
+			workMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.workMessage(func),
 			payment: (func, index = this._configIndex) => this._easyWechats[index].middleware.payment(func),
 			refund: (func, index = this._configIndex) => this._easyWechats[index].middleware.refund(func),
 			wxAppJsonMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppJsonMessage(func),
