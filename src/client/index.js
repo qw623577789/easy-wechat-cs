@@ -151,6 +151,7 @@ module.exports = class {
 				temporaryUpload: (request, index = this._configIndex) => this._request('work.resource.temporary_upload', { request, index })
 			},
 			user: {
+				enterpriseCustomerInfoGetByEnterpriseCustomerUserId: (request, index = this._configIndex) => this._request('work.user.enterprise_customer_info_get_by_enterprise_customer_user_id', { request, index }),
 				infoGetByAuthUserTicket: (request, index = this._configIndex) => this._request('work.user.info_get_by_auth_user_ticket', { request, index }),
 				infoGetByCode: (request, index = this._configIndex) => this._request('work.user.info_get_by_code', { request, index }),
 				infoGetByUserId: (request, index = this._configIndex) => this._request('work.user.info_get_by_user_id', { request, index })
