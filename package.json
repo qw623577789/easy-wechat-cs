@@ -13,7 +13,7 @@
     "@qtk/schema-tcp-request-framework": "^2.3.3",
     "body-parser": "^1.20.0",
     "easy-wechat": "^5.4.0",
-    "log4js": "^2.9.0",
+    "log4js": "^6.4.0",
     "opts": "^1.2.6",
     "path": "^0.12.7"
   },
