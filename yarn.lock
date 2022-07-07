@@ -500,10 +500,10 @@ double-ended-queue@^2.1.0-0:
   resolved "https://registry.yarnpkg.com/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
   integrity sha1-ED01J/0xUo9AGIEwyEHv3XgmTlw=
 
-easy-wechat@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.npmjs.org/easy-wechat/-/easy-wechat-5.3.0.tgz#3dd8a62796ecab1129d5fb497271af633ff5bb6b"
-  integrity sha512-18A5AIUXZRb++7DJfuCuV+Rl5BCunku6Q7uCeLPWBdS+NBSOUo4BkoA5y0kN7hCJENMOY2xue1pLVprXDZIHCg==
+easy-wechat@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/easy-wechat/-/easy-wechat-5.4.0.tgz#b341a61d54201f39690d4152f4e5d7db5a872745"
+  integrity sha512-T8IQ5G9S4u6yvxIjz7x8CnrVQ9ajcMwXI+zSwX/ALBlUx9MHielt3fwpPQkXW6UG1LjNxkGljstfWnzJZe9UmQ==
   dependencies:
     "@qtk/schema" "0.0.7"
     assert "^1.4.1"
@@ -1339,9 +1339,9 @@ mocha@^4.1.0:
     supports-color "4.4.0"
 
 moment@^2.20.1:
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
 ms@2.0.0:
   version "2.0.0"
