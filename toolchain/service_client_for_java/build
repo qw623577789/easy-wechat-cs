@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const { validator } = require('@qtk/schema');
+const { toBigCamelCase, getDirList, getScriptName } = require('../lib');
+
+const { getHandlers } = require('./util');
+
+const scriptName = getScriptName(__filename);
+
+module.exports = (async (projectName = 'common') => {
+    console.time(`${scriptName} done in`); 
+
+    const projectBigCamelName = toBigCamelCase(projectName);
+
+    let serviceInterfaceMapper = {};
+
+    const servicePath = `${PROJECT_ROOT}/src/server`;
+    const serviceName = 'server';
+
+    serviceInterfaceMapper[serviceName] = [];
+
+    let handlers = getHandlers(`${servicePath}/schema`, serviceName, projectBigCamelName);
+
+    for await (let handler of handlers) {
+        let { request, response,name, requestClass, responseClass } = handler;
+        console.log(name)
+        // console.log(JSON.stringify(request.request))
+        serviceInterfaceMapper[serviceName].push({
+            rname: handler.name,
+            name: handler.name.replace(/\./g, '_'),
+            request: validator.from(request).jsonSchema,
+            response: validator.from(response).jsonSchema,
+        });
+    }
+
+    fs.writeFileSync(
+        `${__dirname}/wechat_client_for_java.json`,
+        JSON.stringify(serviceInterfaceMapper, null, 4)
+    );
+
+    console.timeEnd(`${scriptName} done in`);
+})();

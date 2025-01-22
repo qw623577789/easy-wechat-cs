@@ -40,6 +40,8 @@ module.exports = class {
             refund: (func, index = this._configIndex) => this._easyWechats[index].middleware.refund(func),
 			wxAppJsonMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppJsonMessage(func),
 			wxAppXmlMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppXmlMessage(func),
+            merchantTransferMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.merchantTransferMessage(func),
+            workCSMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.workCSMessage(func),
 		}
 	}
 }

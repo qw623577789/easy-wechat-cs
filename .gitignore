@@ -4,3 +4,4 @@ package-lock.json
 /demo/api-client-dev.js
 /demo/middleware-client-dev.js
 /demo/start_server-dev.sh
+/toolchain/service_client_for_java/wechat_client_for_java.json

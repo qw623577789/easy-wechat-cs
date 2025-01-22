@@ -41,6 +41,12 @@ module.exports = class {
 			common: {
 				signGet: (request, index = this._configIndex) => this._request('payment.common.sign_get', { request, index })
 			},
+			merchantTransfer: {
+				cancel: (request, index = this._configIndex) => this._request('payment.merchant_transfer.cancel', { request, index }),
+				create: (request, index = this._configIndex) => this._request('payment.merchant_transfer.create', { request, index }),
+				getByOrderId: (request, index = this._configIndex) => this._request('payment.merchant_transfer.get_by_order_id', { request, index }),
+				getByWechatOrderId: (request, index = this._configIndex) => this._request('payment.merchant_transfer.get_by_wechat_order_id', { request, index })
+			},
 			order: {
 				create: (request, index = this._configIndex) => this._request('payment.order.create', { request, index }),
 				get: (request, index = this._configIndex) => this._request('payment.order.get', { request, index }),
@@ -132,6 +138,20 @@ module.exports = class {
 					videoSend: (request, index = this._configIndex) => this._request('work.msg.app.video_send', { request, index }),
 					voiceSend: (request, index = this._configIndex) => this._request('work.msg.app.voice_send', { request, index }),
 					wxAppSend: (request, index = this._configIndex) => this._request('work.msg.app.wx_app_send', { request, index })
+				},
+				cs: {
+					eventMenuSend: (request, index = this._configIndex) => this._request('work.msg.cs.event_menu_send', { request, index }),
+					eventTextSend: (request, index = this._configIndex) => this._request('work.msg.cs.event_text_send', { request, index }),
+					fetchMessage: (request, index = this._configIndex) => this._request('work.msg.cs.fetch_message', { request, index }),
+					fileSend: (request, index = this._configIndex) => this._request('work.msg.cs.file_send', { request, index }),
+					imageSend: (request, index = this._configIndex) => this._request('work.msg.cs.image_send', { request, index }),
+					linkSend: (request, index = this._configIndex) => this._request('work.msg.cs.link_send', { request, index }),
+					locationSend: (request, index = this._configIndex) => this._request('work.msg.cs.location_send', { request, index }),
+					menuSend: (request, index = this._configIndex) => this._request('work.msg.cs.menu_send', { request, index }),
+					textSend: (request, index = this._configIndex) => this._request('work.msg.cs.text_send', { request, index }),
+					videoSend: (request, index = this._configIndex) => this._request('work.msg.cs.video_send', { request, index }),
+					voiceSend: (request, index = this._configIndex) => this._request('work.msg.cs.voice_send', { request, index }),
+					wxAppSend: (request, index = this._configIndex) => this._request('work.msg.cs.wx_app_send', { request, index })
 				}
 			},
 			oauth: {
@@ -212,6 +232,8 @@ module.exports = class {
 			refund: (func, index = this._configIndex) => this._easyWechats[index].middleware.refund(func),
 			wxAppJsonMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppJsonMessage(func),
 			wxAppXmlMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.wxAppXmlMessage(func),
+			merchantTransferMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.merchantTransferMessage(func),
+			workCSMessage: (func, index = this._configIndex) => this._easyWechats[index].middleware.workCSMessage(func),
 		}
 	}
 }

@@ -1,4 +1,4 @@
-const {array, object, string, integer, empty} = require('@qtk/schema').schema;
+const { array, object, string, integer, empty } = require('@qtk/schema').schema;
 
 const info = {
     title: "获取server端配置",
@@ -36,10 +36,16 @@ const response = array(
             key: string(),
             notifyUrl: string(),
             pfxFile: string().desc('微信商户平台证书'),
-            refundNotifyUrl: string()
-        }).require('appId', 'mchId', 'key', 'notifyUrl'),
+            refundNotifyUrl: string(),
+
+            apiV3CallbackAESKey: string().desc('v3版本回调解密key'),
+            wechatPaySerial: string().desc('微信支付公钥ID'),
+            certificateSerialNumber: string().desc('平台证书序列号'),
+            signPrivateKey: string().desc('签名秘钥'),
+            signPublicKey: string().desc('签名公钥'),
+        }).require('appId', 'mchId'),
         logDir: string()
     })
 );
 
-module.exports = {info, request, response};
+module.exports = { info, request, response };
